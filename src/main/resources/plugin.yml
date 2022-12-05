@@ -1,0 +1,7 @@
+name: Puissance
+version: '${project.version}'
+main: fr.weathox.Puissance
+api-version: 1.18
+authors: [ WeaThox_ ]
+description:
+  Minecraft plugin of the game: "Puissance 4"
