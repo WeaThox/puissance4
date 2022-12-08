@@ -50,7 +50,30 @@ public class manager {
     }
 
     public Boolean verticale(Location blockLocation){
+        int counter = 0;
 
+        for(int i = 1; i < 4; i ++){
+            Location getLocation = blockLocation;
+            getLocation.setX(blockLocation.getY() + i);
+            if(blockLocation.getBlock().getData() == getLocation.getBlock().getData()){
+                counter += 1;
+            }
+        }
+        if(counter == 3){
+            return true;
+        }
+        counter = 0;
+        for(int i = -1; i > -3; i ++){
+            Location getLocation = blockLocation;
+            getLocation.setX(blockLocation.getY() + i);
+            if(blockLocation.getBlock().getData() == getLocation.getBlock().getData()){
+                counter += 1;
+            }
+        }
+        if(counter == 3){
+            return true;
+        }
+        return false;
     }
 
     public Boolean diagonale(Location blockLocation){
