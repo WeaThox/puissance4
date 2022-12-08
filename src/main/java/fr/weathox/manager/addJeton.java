@@ -49,8 +49,8 @@ public class addJeton {
         }
         // Si la partie est terminée en égalité
         else if(new manager().isEquality(blockPoseLocation)) {
-            new end().endParty(player, Player);
             manager.equalityStatut = true;
+            new end().endParty(player, Player);
         }
 
         // Passer au joueur suivant
