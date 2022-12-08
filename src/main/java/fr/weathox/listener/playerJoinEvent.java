@@ -18,15 +18,16 @@ public class playerJoinEvent implements Listener {
 
     private Puissance plugin;
     public playerJoinEvent(Puissance plugin) { this.plugin = plugin;}
-    Location spawnPlayer = new Location(Bukkit.getWorld("world"), -15, 100,  0);
+    public static Location spawnPlayer = new Location(Bukkit.getWorld("world"), 4, 106,  9);
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
 
+        spawnPlayer.setY(spawnPlayer.getY() + 1);
         Player player = event.getPlayer();
         player.teleport(spawnPlayer);
         player.setGameMode(GameMode.ADVENTURE);
-        NMSUtils.sendTitle(player, "§8§lPuissance §c4", "§fDe §6§lHugo §fet §6§lTitouan", 1, 3, 1);
+        NMSUtils.sendTitle(player, "§8§l    Puissance §c4", "§fDe §6§lHugo §fet §6§lTitouan", 1, 3, 1);
         new register().registerFirstPlayer(player);
     }
 }

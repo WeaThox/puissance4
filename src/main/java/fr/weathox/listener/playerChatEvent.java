@@ -35,7 +35,13 @@ public class playerChatEvent implements Listener {
         }
         if(start.statutGame){
             event.setCancelled(true);
-            new verifyColonne().isColonneFree(Integer.parseInt(event.getMessage()));
+            if(Integer.parseInt(event.getMessage()) > 7 || Integer.parseInt(event.getMessage()) < 1){
+                event.getPlayer().sendMessage(Puissance.prefix + "§fMerci de renseigner un chiffre entre 1 et 7 inclus.");
+                return;
+            }
+            if(!new verifyColonne().isColonneFree(Integer.parseInt(event.getMessage()))){
+
+            }
         }
 
     }
