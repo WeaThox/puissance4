@@ -1,5 +1,6 @@
 package fr.weathox.manager;
 
+import fr.weathox.manager.winCondition.manager;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
@@ -32,6 +33,12 @@ public class addJeton {
             actualPlayer = register.player2name;
         }else{
             actualPlayer = register.player1name;
+        }
+        if(new manager().hasPlayerWin(blockPoseLocation)){
+            new end().endParty(player, Player);
+            return;
+        }else if(new manager().isEquality()){
+
         }
         new start().startGame(Player, register.player1name, register.player2name);
 
