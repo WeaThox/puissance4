@@ -9,8 +9,9 @@ public class verifyColonne {
     Location verifyingLocation = new Location(Bukkit.getWorld("world"), 0, 105,  0);
     public Boolean isColonneFree(int colonne){
 
-        for(int i = 6; i != 0; i--){
-            verifyingLocation.setX(colonne);
+        verifyingLocation.setX(colonne);
+        for(int i = 111; i != 105; i--){
+            verifyingLocation.setY(i);
             if(verifyingLocation.getBlock().getType() == null){
                 return true;
             }

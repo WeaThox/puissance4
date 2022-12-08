@@ -18,7 +18,7 @@ public class playerJoinEvent implements Listener {
 
     private Puissance plugin;
     public playerJoinEvent(Puissance plugin) { this.plugin = plugin;}
-    public static Location spawnPlayer = new Location(Bukkit.getWorld("world"), 4, 106,  9);
+    public static Location spawnPlayer = new Location(Bukkit.getWorld("world"), 4.0, 106,  9, (float)178.8,  (float)1.9);
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){

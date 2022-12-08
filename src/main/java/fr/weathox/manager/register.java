@@ -8,6 +8,8 @@ public class register {
     public static Boolean player1Statut = false;
     public static Boolean player2Statut = false;
 
+    public static String player1name;
+    public static String player2name;
     public void registerFirstPlayer(Player player){
 
         player.sendMessage(Puissance.prefix + "§fRenseignez le pseudo du §cpremier §fjoueur.");

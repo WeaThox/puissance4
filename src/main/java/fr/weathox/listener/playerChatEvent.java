@@ -1,6 +1,7 @@
 package fr.weathox.listener;
 
 import fr.weathox.Puissance;
+import fr.weathox.manager.addJeton;
 import fr.weathox.manager.register;
 import fr.weathox.manager.start;
 import org.bukkit.event.EventHandler;
@@ -22,6 +23,7 @@ public class playerChatEvent implements Listener {
             player1Name = event.getMessage();
             event.getPlayer().sendMessage(Puissance.prefix + "§fLe joueur §b1 §fest §b"+ player1Name);
             register.player1Statut = false;
+            register.player1name = event.getMessage();
             new register().registerSecondPlayer(event.getPlayer());
             return;
 
@@ -30,7 +32,9 @@ public class playerChatEvent implements Listener {
             player2Name = event.getMessage();
             event.getPlayer().sendMessage(Puissance.prefix + "§fLe joueur §b2 §fest §b" + player2Name);
             register.player2Statut = false;
+            register.player2name = event.getMessage();
             new start().startGame(event.getPlayer(), player1Name, player2Name);
+            start.statutGame = true;
             return;
         }
         if(start.statutGame){
@@ -40,7 +44,10 @@ public class playerChatEvent implements Listener {
                 return;
             }
             if(!new verifyColonne().isColonneFree(Integer.parseInt(event.getMessage()))){
-
+                event.getPlayer().sendMessage(Puissance.prefix + "§fCette Colonne n'est pas disponible merci d'en choisir une autre.");
+                return;
+            }else{
+                addJeton.poseBlock(start.actualPlayer, Integer.parseInt(event.getMessage()), event.getPlayer());
             }
         }
 
