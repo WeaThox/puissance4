@@ -141,7 +141,25 @@ public class manager {
         return counter == 3;
     }
 
-    public Boolean isEquality(){
-        return false;
+    public Boolean isEquality(Location blockPoseLocation) {
+        // Vérifier si les 7 colonnes sont complètes
+        boolean isFull = true;
+        for (int i = 0; i < 7; i++) {
+            blockPoseLocation.setX(i);
+            // Si une colonne n'est pas complète
+            if (blockPoseLocation.getBlock().getType() == Material.AIR) {
+                isFull = false;
+                break;
+            }
+        }
+
+        // Si les 7 colonnes sont complètes
+        if (isFull) {
+            // Retourner vrai
+            return true;
+        } else {
+            // Sinon, retourner faux
+            return false;
+        }
     }
 }
