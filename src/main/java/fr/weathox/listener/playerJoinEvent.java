@@ -18,7 +18,7 @@ public class playerJoinEvent implements Listener {
 
     private Puissance plugin;
     public playerJoinEvent(Puissance plugin) { this.plugin = plugin;}
-    Location spawnPlayer = new Location(Bukkit.getWorld("world"), 0, 100,  0);
+    Location spawnPlayer = new Location(Bukkit.getWorld("world"), -15, 100,  0);
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){

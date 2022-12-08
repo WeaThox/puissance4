@@ -10,9 +10,15 @@ public class register {
 
     public void registerFirstPlayer(Player player){
 
-        player.sendMessage(Puissance.prefix + "Renseignez le pseudo du premier joueur");
+        player.sendMessage(Puissance.prefix + "Renseignez le pseudo du premier joueur.");
         player1Statut = true;
 
+    }
+
+    public void registerSecondPlayer(Player player){
+
+        player.sendMessage(Puissance.prefix + "Renseignez le pseudo du second joueur.");
+        player2Statut = true;
     }
 
 }
