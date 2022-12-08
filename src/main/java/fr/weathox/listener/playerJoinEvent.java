@@ -33,7 +33,7 @@ public class playerJoinEvent implements Listener {
         spawnPlayer.setY(spawnPlayer.getY() + 1);
         Player player = event.getPlayer();
         player.teleport(spawnPlayer);
-        player.setGameMode(GameMode.ADVENTURE);
+        player.setGameMode(GameMode.CREATIVE);
         NMSUtils.sendTitle(player, "§8§lPuissance §c4", "§fDe §6§lHugo §fet §6§lTitouan", 1, 3, 1);
         new register().registerFirstPlayer(player);
     }
