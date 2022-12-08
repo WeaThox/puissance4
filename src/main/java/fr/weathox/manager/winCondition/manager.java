@@ -76,9 +76,23 @@ public class manager {
         return counter == 3;
     }
 
-    public Boolean diagonale(Location blockLocation){
-        return false;
-    }
+        public Boolean diagonale(Location blockLocation){
+            int counter = 0;
+            for(int i = -1; i > -4; i -=1){
+                blockLocation.setX(blockLocation.getX() + i);
+                blockLocation.setY(blockLocation.getY() + i);
+                if(blockLocation.getX() !=0 && blockLocation.getY() !=105) {
+                    if (start.actualPlayer.equals(register.player1name) && blockLocation.getBlock().getType() == Material.STAINED_CLAY) {
+                        counter += 1;
+                    } else if (start.actualPlayer.equals(register.player2name) && blockLocation.getBlock().getType() == Material.WOOL) {
+                        counter += 1;
+                    }
+                }
+                blockLocation.setX(blockLocation.getX() - i);
+                blockLocation.setY(blockLocation.getY() - i);
+            }
+            return counter == 3;
+        }
 
     public Boolean isEquality(){
         return false;
