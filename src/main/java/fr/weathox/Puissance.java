@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Puissance extends JavaPlugin {
 
-    public static String prefix = "Puissance§c4 §8§l» ";
+    public static String prefix = "§8§lPuissance§c4 §8§l» ";
 
     @Override
     public void onEnable() {

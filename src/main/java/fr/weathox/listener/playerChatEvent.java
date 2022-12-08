@@ -18,20 +18,23 @@ public class playerChatEvent implements Listener {
     public void onPlayerSendMessage(PlayerChatEvent event){
 
         if(register.player1Statut){
+            event.setCancelled(true);
             player1Name = event.getMessage();
-            event.getPlayer().sendMessage(Puissance.prefix + "Le joueur §b1 §fest §b"+ player1Name);
+            event.getPlayer().sendMessage(Puissance.prefix + "§fLe joueur §b1 §fest §b"+ player1Name);
             register.player1Statut = false;
             new register().registerSecondPlayer(event.getPlayer());
             return;
 
         }else if(register.player2Statut){
+            event.setCancelled(true);
             player2Name = event.getMessage();
-            event.getPlayer().sendMessage(Puissance.prefix + "Le joueur §b2 §fest §b" + player2Name);
+            event.getPlayer().sendMessage(Puissance.prefix + "§fLe joueur §b2 §fest §b" + player2Name);
             register.player2Statut = false;
             new start().startGame(event.getPlayer(), player1Name, player2Name);
             return;
         }
         if(start.statutGame){
+            event.setCancelled(true);
             new verifyColonne().isColonneFree(Integer.parseInt(event.getMessage()));
         }
 

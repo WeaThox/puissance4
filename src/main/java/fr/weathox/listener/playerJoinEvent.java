@@ -26,7 +26,7 @@ public class playerJoinEvent implements Listener {
         Player player = event.getPlayer();
         player.teleport(spawnPlayer);
         player.setGameMode(GameMode.ADVENTURE);
-        NMSUtils.sendTitle(player, "Puissance §c4", "§fDe Hugo et Titouan", 1, 3, 1);
+        NMSUtils.sendTitle(player, "§8§lPuissance §c4", "§fDe §6§lHugo §fet §6§lTitouan", 1, 3, 1);
         new register().registerFirstPlayer(player);
     }
 }

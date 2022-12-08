@@ -16,7 +16,7 @@ public class creation {
         initialLocation.getBlock().setData(DyeColor.BLUE.getData());
         for(int i = 0; i < 6; i++){
 
-            initialLocation.setX(initialLocation.getY() + 1);
+            initialLocation.setY(initialLocation.getY() + 1);
             initialLocation.getBlock().setType(Material.WOOL);
             initialLocation.getBlock().setData(DyeColor.BLUE.getData());
 
@@ -30,7 +30,7 @@ public class creation {
         }
         for(int i = 0; i < 6; i++){
 
-            initialLocation.setX(initialLocation.getY() - 1);
+            initialLocation.setY(initialLocation.getY() - 1);
             initialLocation.getBlock().setType(Material.WOOL);
             initialLocation.getBlock().setData(DyeColor.BLUE.getData());
 

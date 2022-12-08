@@ -14,7 +14,7 @@ public class start {
             actualPlayer = player1;
         }
 
-        player.sendMessage(Puissance.prefix + "C'est au joueur §b" + actualPlayer + "§f de jouer. Merci de préciser dans quelle colonne vous souhaitez jouer.");
+        player.sendMessage(Puissance.prefix + "§fC'est au joueur §b" + actualPlayer + "§f de jouer. Merci de préciser dans quelle colonne vous souhaitez jouer.");
 
     }
 
