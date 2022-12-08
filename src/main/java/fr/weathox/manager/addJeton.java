@@ -36,7 +36,7 @@ public class addJeton {
             }
         }
         if(new manager().hasPlayerWin(blockPoseLocation)){
-            new end().endParty(player, Player);
+            new end().endParty(actualPlayer, Player);
             return;
         }else if(new manager().isEquality()){
 
