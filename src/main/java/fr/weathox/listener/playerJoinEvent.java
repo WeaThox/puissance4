@@ -15,12 +15,17 @@ public class playerJoinEvent implements Listener {
 
     private Puissance plugin;
     public playerJoinEvent(Puissance plugin) { this.plugin = plugin;}
-    public static Location spawnPlayer = new Location(Bukkit.getWorld("world"), 4.0, 106,  9, (float)178.8,  (float)1.9);
+
+    //Localisation de spawn du joueur.
+    public static Location spawnPlayer = new Location(Bukkit.getWorld("world"), 4.421, 106,  9.313, (float)178.8,  (float)1.9);
+
+    //Localisation initiale pour nettoyer le terrain de jeu.
     Location initialLocation = new Location(Bukkit.getWorld("world"), 0, 105,  0);
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
         event.setJoinMessage(null);
 
+        //nettoyage de tous les block présents dans le carré de jeu.
         for(int i = 1; i <8; i++){
             initialLocation.setX(i);
             for(int j = 106; j < 112; j++){
