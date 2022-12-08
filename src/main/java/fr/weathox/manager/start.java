@@ -8,6 +8,7 @@ import java.util.Objects;
 public class start {
 
     public static String actualPlayer;
+    public static int numberPlayerTurn = 1;
     public static Boolean statutGame = false;
 
 
