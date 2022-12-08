@@ -1,6 +1,8 @@
 package fr.weathox.listener;
 
 import fr.weathox.Puissance;
+import fr.weathox.manager.register;
+import fr.weathox.utils.NMSUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -24,7 +26,7 @@ public class playerJoinEvent implements Listener {
         Player player = event.getPlayer();
         player.teleport(spawnPlayer);
         player.setGameMode(GameMode.ADVENTURE);
-
-
+        NMSUtils.sendTitle(player, "Puissance §c4", "§fDe Hugo et Titouan", 1, 3, 1);
+        new register().registerFirstPlayer(player);
     }
 }
