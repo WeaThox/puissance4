@@ -18,11 +18,6 @@ public class start {
         }
 
         player.sendMessage(Puissance.prefix + "§fC'est au joueur §b" + actualPlayer + "§f de jouer. [1] [2] [3] [4] [5] [6] [7]");
-        if(Objects.equals(actualPlayer, player1)){
-            actualPlayer = player2;
-        }else{
-            actualPlayer = player1;
-        }
 
     }
 

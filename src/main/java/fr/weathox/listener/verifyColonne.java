@@ -2,6 +2,7 @@ package fr.weathox.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 
 public class verifyColonne {
 
@@ -12,7 +13,7 @@ public class verifyColonne {
         verifyingLocation.setX(colonne);
         for(int i = 111; i != 105; i--){
             verifyingLocation.setY(i);
-            if(verifyingLocation.getBlock().getType() == null){
+            if(verifyingLocation.getBlock().getType() == Material.AIR){
                 return true;
             }
         }
