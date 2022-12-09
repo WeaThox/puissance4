@@ -1,5 +1,7 @@
 package fr.weathox.manager;
 
+import fr.weathox.listener.playerChatEvent;
+import fr.weathox.listener.playerJoinEvent;
 import fr.weathox.manager.winCondition.manager;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -53,11 +55,15 @@ public class addJeton {
             new end().endParty(player, Player);
         }
 
-        // Passer au joueur suivant
+        // Sinon passer au joueur suivant
         if(Objects.equals(actualPlayer, register.player1name)) {
             actualPlayer = register.player2name;
+            playerChatEvent.bossbarPlayer1.removePlayer(Player);
+            playerChatEvent.bossbarPlayer2.addPlayer(Player);
         } else {
             actualPlayer = register.player1name;
+            playerChatEvent.bossbarPlayer2.removePlayer(Player);
+            playerChatEvent.bossbarPlayer1.addPlayer(Player);
         }
 
         // Démarrer le jeu

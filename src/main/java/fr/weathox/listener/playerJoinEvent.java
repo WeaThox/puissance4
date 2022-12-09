@@ -6,6 +6,10 @@ import fr.weathox.utils.NMSUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,6 +25,8 @@ public class playerJoinEvent implements Listener {
 
     //Localisation initiale pour nettoyer le terrain de jeu.
     Location initialLocation = new Location(Bukkit.getWorld("world"), 0, 105,  0);
+    public static BossBar playerBossBar;
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
         event.setJoinMessage(null);
@@ -35,10 +41,14 @@ public class playerJoinEvent implements Listener {
 
         }
 
+        playerBossBar = Bukkit.createBossBar("Rentre le pseudo du premier joueur pour jouer !", BarColor.RED, BarStyle.SEGMENTED_10, BarFlag.DARKEN_SKY, BarFlag.CREATE_FOG);
+        playerBossBar.addPlayer(event.getPlayer());
+
         spawnPlayer.setY(spawnPlayer.getY() + 1);
         Player player = event.getPlayer();
         player.teleport(spawnPlayer);
         player.setGameMode(GameMode.CREATIVE);
+        player.getInventory().clear();
         NMSUtils.sendTitle(player, "§8§lPuissance §c4", "§fDe §6§lHugo §fet §6§lTitouan", 1, 3, 1);
         new register().registerFirstPlayer(player);
     }

@@ -4,6 +4,11 @@ import fr.weathox.Puissance;
 import fr.weathox.manager.addJeton;
 import fr.weathox.manager.register;
 import fr.weathox.manager.start;
+import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
@@ -14,6 +19,10 @@ public class playerChatEvent implements Listener {
 
     public static String player1Name;
     public static String player2Name;
+
+    public static BossBar bossbarPlayer1;
+    public static BossBar bossbarPlayer2;
+    public static BossBar bossBarRegisterPlayer2 = Bukkit.createBossBar("Le premier joueur est §b" + register.player1name + " §f rentre le pseudo du second joueur !", BarColor.RED, BarStyle.SEGMENTED_10, BarFlag.DARKEN_SKY, BarFlag.CREATE_FOG);
 
     @EventHandler
     public void onPlayerSendMessage(PlayerChatEvent event){
@@ -30,6 +39,10 @@ public class playerChatEvent implements Listener {
             register.player1name = event.getMessage();
             // Appelle la méthode pour enregistrer le joueur 2
             new register().registerSecondPlayer(event.getPlayer());
+            // Change la BossBar du joueur
+            bossBarRegisterPlayer2.setTitle("Le premier joueur est §b" + register.player1name + " §frentre le pseudo du second joueur !");
+            playerJoinEvent.playerBossBar.removePlayer(event.getPlayer());
+            bossBarRegisterPlayer2.addPlayer(event.getPlayer());
             return;
 
             // Si le joueur 2 envoie un message
@@ -42,6 +55,9 @@ public class playerChatEvent implements Listener {
             register.player2Statut = false;
             // Enregistre le nom du joueur 2
             register.player2name = event.getMessage();
+            //créer les bossbar
+            bossbarPlayer1 = Bukkit.createBossBar("C'est à §c" + register.player1name + " §fde jouer", BarColor.RED, BarStyle.SEGMENTED_10, BarFlag.DARKEN_SKY, BarFlag.CREATE_FOG);
+            bossbarPlayer2 = Bukkit.createBossBar("C'est à §6" + register.player2name + " §fde jouer", BarColor.YELLOW, BarStyle.SEGMENTED_10, BarFlag.DARKEN_SKY, BarFlag.CREATE_FOG);;
             // Appelle la méthode pour démarrer la partie
             new start().startGame(event.getPlayer(), player1Name, player2Name);
             // Met à jour le statut de la partie
