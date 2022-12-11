@@ -115,24 +115,30 @@ public class manager {
 
         Block block = blockLocation.getBlock();
         Material type = block.getType();
+        //on récupère les 3 blocks dans la diagonale inférieure droite
         Block block1 = block.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST);
         Block block2 = block1.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST);
         Block block3 = block2.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST);
+        //on vérifie qu'ils ne fassent pas partis des bordures.
         if(block1.getLocation().getY() == 105 || block2.getLocation().getY() == 105 || block3.getLocation().getY() == 105){
             return false;
         }
+        //on renvoie si la diagonale est complète ou non
         return (block1.getType() == type && block2.getType() == type && block3.getType() == type);
     }
 
     public Boolean diagonaleRight(Location blockLocation){
         Block block = blockLocation.getBlock();
         Material type = block.getType();
+        //on récupère les 3 blocks dans la diagonale inférieure droite
         Block block1 = block.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST);
         Block block2 = block1.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST);
         Block block3 = block2.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST);
+        //on vérifie qu'ils ne fassent pas partis des bordures.
         if(block1.getLocation().getY() == 105 || block2.getLocation().getY() == 105 || block3.getLocation().getY() == 105){
             return false;
         }
+        //on renvoie si la diagonale est complète ou non
         return (block1.getType() == type && block2.getType() == type && block3.getType() == type);
     }
 
