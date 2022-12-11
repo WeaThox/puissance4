@@ -5,6 +5,8 @@ import fr.weathox.manager.start;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 
 public class manager {
 
@@ -22,7 +24,9 @@ public class manager {
             return true;
         }
         // Vérifie si la condition de victoire est remplie diagonalement
-        else return diagonale(blockLocation);
+        else if(diagonaleLeft(blockLocation)){
+            return true;
+        }else return(diagonaleRight(blockLocation));
     }
 
     public Boolean horizontale(Location blockLocation) {
@@ -107,38 +111,29 @@ public class manager {
 
 
 
-    public Boolean diagonale(Location blockLocation){
-        // Initialiser le compteur à 0
-        int counter = 0;
+    public Boolean diagonaleLeft(Location blockLocation){
 
-        // Pour chaque i dans la plage [-1, -4[, décrémenter i
-        for(int i = -1; i > -4; i -=1){
-            // Ajouter i à la position en x et y de blockLocation
-            blockLocation.setX(blockLocation.getX() + i);
-            blockLocation.setY(blockLocation.getY() + i);
-
-            // Si la position en x ou y de blockLocation n'est pas 0 ou 105, respectivement
-            if(blockLocation.getX() !=0 && blockLocation.getY() !=105) {
-                // Si le joueur actuel est player1 et que le type de block à la position de blockLocation est STAINED_CLAY
-                if (start.actualPlayer.equals(register.player1name) && blockLocation.getBlock().getType() == Material.STAINED_CLAY) {
-                    // Incrémenter le compteur
-                    counter += 1;
-                }
-                // Sinon, si le joueur actuel est player2 et que le type de block à la position de blockLocation est WOOL
-                else if (start.actualPlayer.equals(register.player2name) && blockLocation.getBlock().getType() == Material.WOOL) {
-                    // Incrémenter le compteur
-                    counter += 1;
-                }
-            }
-
-            // Soustraire i à la position en x et y de blockLocation
-            blockLocation.setX(blockLocation.getX() - i);
-            blockLocation.setY(blockLocation.getY() - i);
+        Block block = blockLocation.getBlock();
+        Material type = block.getType();
+        Block block1 = block.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST);
+        Block block2 = block1.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST);
+        Block block3 = block2.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST);
+        if(block1.getLocation().getY() == 105 || block2.getLocation().getY() == 105 || block3.getLocation().getY() == 105){
+            return false;
         }
+        return (block1.getType() == type && block2.getType() == type && block3.getType() == type);
+    }
 
-        // Si le compteur est égal à 3, retourner vrai
-        // Sinon, retourner faux
-        return counter == 3;
+    public Boolean diagonaleRight(Location blockLocation){
+        Block block = blockLocation.getBlock();
+        Material type = block.getType();
+        Block block1 = block.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST);
+        Block block2 = block1.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST);
+        Block block3 = block2.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST);
+        if(block1.getLocation().getY() == 105 || block2.getLocation().getY() == 105 || block3.getLocation().getY() == 105){
+            return false;
+        }
+        return (block1.getType() == type && block2.getType() == type && block3.getType() == type);
     }
 
     public Boolean isEquality(Location blockPoseLocation) {
