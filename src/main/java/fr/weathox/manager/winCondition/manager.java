@@ -145,6 +145,7 @@ public class manager {
         // Vérifier si les 7 colonnes sont complètes
         boolean isFull = true;
         for (int i = 0; i < 7; i++) {
+            blockPoseLocation.setY(111);
             blockPoseLocation.setX(i);
             // Si une colonne n'est pas complète
             if (blockPoseLocation.getBlock().getType() == Material.AIR) {
