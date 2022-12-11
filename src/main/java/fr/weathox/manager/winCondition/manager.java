@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 
 public class manager {
 
@@ -24,11 +25,7 @@ public class manager {
         // Vérifie si la condition de victoire est remplie verticalement
         else if (horizontale(blockLocation)) {
             return true;
-        }
-        // Vérifie si la condition de victoire est remplie diagonalement
-        else if(diagonaleLeft(blockLocation)){
-            return true;
-        }else return(diagonaleRight(blockLocation));
+        }else return(diagonale(blockLocation));
     }
 
     public Boolean verticale(Location blockLocation){
@@ -74,36 +71,56 @@ public class manager {
         return counter >= 4;
     }
 
-
-    public Boolean diagonaleLeft(Location blockLocation){
-
+    ArrayList<Block> diagonaleList = new ArrayList<>();
+    public Boolean diagonale(Location blockLocation){
+        int counter = 0;
         Block block = blockLocation.getBlock();
-        Material type = block.getType();
-        //on récupère les 3 blocks dans la diagonale inférieure droite
-        Block block1 = block.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST);
-        Block block2 = block1.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST);
-        Block block3 = block2.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST);
-        //on vérifie qu'ils ne fassent pas partis des bordures.
-        if(block1.getLocation().getY() == 105 || block2.getLocation().getY() == 105 || block3.getLocation().getY() == 105){
-            return false;
-        }
-        //on renvoie si la diagonale est complète ou non
-        return (block1.getType() == type && block2.getType() == type && block3.getType() == type);
-    }
+        diagonaleList.add(block.getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST));
+        diagonaleList.add(diagonaleList.get(0).getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST));
+        diagonaleList.add(diagonaleList.get(1).getRelative(BlockFace.DOWN).getRelative(BlockFace.WEST));
+        diagonaleList.add(block.getRelative(BlockFace.UP).getRelative(BlockFace.EAST));
+        diagonaleList.add(diagonaleList.get(3).getRelative(BlockFace.UP).getRelative(BlockFace.EAST));
+        diagonaleList.add(diagonaleList.get(4).getRelative(BlockFace.UP).getRelative(BlockFace.EAST));
 
-    public Boolean diagonaleRight(Location blockLocation){
-        Block block = blockLocation.getBlock();
-        Material type = block.getType();
-        //on récupère les 3 blocks dans la diagonale inférieure droite
-        Block block1 = block.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST);
-        Block block2 = block1.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST);
-        Block block3 = block2.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST);
-        //on vérifie qu'ils ne fassent pas partis des bordures.
-        if(block1.getLocation().getY() == 105 || block2.getLocation().getY() == 105 || block3.getLocation().getY() == 105){
-            return false;
+        for(int i =0; i < diagonaleList.size(); i+=1){
+            Block blocks = diagonaleList.get(i);
+            if(blocks.getLocation().getX() != 0 && blocks.getLocation().getX() != 8){
+                if(blocks.getLocation().getY() !=105 && blocks.getLocation().getY() != 112){
+                    if(blocks.getType() == block.getType()){
+                        counter += 1;
+                    }
+                }
+            }
         }
-        //on renvoie si la diagonale est complète ou non
-        return (block1.getType() == type && block2.getType() == type && block3.getType() == type);
+        for(int i =0; i<6; i++){
+            diagonaleList.remove(0);
+        }
+        if(counter >=3){
+            return true;
+        }
+        counter = 0;
+        diagonaleList.add(block.getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST));
+        diagonaleList.add(diagonaleList.get(0).getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST));
+        diagonaleList.add(diagonaleList.get(1).getRelative(BlockFace.DOWN).getRelative(BlockFace.EAST));
+        diagonaleList.add(block.getRelative(BlockFace.UP).getRelative(BlockFace.WEST));
+        diagonaleList.add(diagonaleList.get(3).getRelative(BlockFace.UP).getRelative(BlockFace.WEST));
+        diagonaleList.add(diagonaleList.get(4).getRelative(BlockFace.UP).getRelative(BlockFace.WEST));
+
+        for(int i =0; i < diagonaleList.size(); i++){
+            Block blocks = diagonaleList.get(i);
+            if(blocks.getLocation().getX() != 0 && blocks.getLocation().getX() != 8){
+                if(blocks.getLocation().getY() !=105 && blocks.getLocation().getY() != 112){
+                    if(blocks.getType() == block.getType()){
+                        counter += 1;
+                    }
+                }
+            }
+        }
+        for(int i =0; i<6; i++){
+            diagonaleList.remove(0);
+        }
+        return counter >=3;
+
     }
 
     public Boolean isEquality(Location blockPoseLocation) {
