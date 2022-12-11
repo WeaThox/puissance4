@@ -20,10 +20,12 @@ public class manager {
 
         // Vérifie si la condition de victoire est remplie horizontalement
         if (verticale(blockLocation)) {
+            Bukkit.broadcastMessage("VERTICALE");
             return true;
         }
         // Vérifie si la condition de victoire est remplie verticalement
         else if (horizontale(blockLocation)) {
+            Bukkit.broadcastMessage("HORIZONTALE");
             return true;
         }else return(diagonale(blockLocation));
     }
@@ -59,16 +61,36 @@ public class manager {
         int counter = 0;
         Location location = new Location(Bukkit.getWorld("world"), blockLocation.getX(), blockLocation.getY(), blockLocation.getZ());
 
-        for(int i = -3; i < 4; i++){
+        for(int i = 1; i < 4; i++){
+            location.setX(location.getX() - i);
+            if(location.getBlock().getType() == blockLocation.getBlock().getType()){
+                if(location.getX() != 0 && location.getX() != 8) {
+                    counter += 1;
+                }
+            } else{
+                location.setX(location.getX() + i);
+                break;
+            }
+            location.setX(location.getX() + i);
+        }
+        boolean isOnlyRightQuatuor = counter == 0;
+        for(int i =1; i<4; i++){
             location.setX(location.getX() + i);
             if(location.getBlock().getType() == blockLocation.getBlock().getType()){
                 if(location.getX() != 0 && location.getX() != 8) {
                     counter += 1;
                 }
+            } else{
+                location.setX(location.getX() - i);
+                break;
             }
             location.setX(location.getX() - i);
         }
-        return counter >= 4;
+        if(isOnlyRightQuatuor){
+            return counter >=3;
+        }
+        return counter >= 3;
+
     }
 
     ArrayList<Block> diagonaleList = new ArrayList<>();
