@@ -73,7 +73,6 @@ public class manager {
             }
             location.setX(location.getX() + i);
         }
-        boolean isOnlyRightQuatuor = counter == 0;
         for(int i =1; i<4; i++){
             location.setX(location.getX() + i);
             if(location.getBlock().getType() == blockLocation.getBlock().getType()){
@@ -85,9 +84,6 @@ public class manager {
                 break;
             }
             location.setX(location.getX() - i);
-        }
-        if(isOnlyRightQuatuor){
-            return counter >=3;
         }
         return counter >= 3;
 
