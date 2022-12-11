@@ -8,6 +8,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
+import java.sql.SQLOutput;
+
 public class manager {
 
 
@@ -16,11 +18,11 @@ public class manager {
     public Boolean hasPlayerWin(Location blockLocation) {
 
         // Vérifie si la condition de victoire est remplie horizontalement
-        if (horizontale(blockLocation)) {
+        if (verticale(blockLocation)) {
             return true;
         }
         // Vérifie si la condition de victoire est remplie verticalement
-        else if (verticale(blockLocation)) {
+        else if (horizontale(blockLocation)) {
             return true;
         }
         // Vérifie si la condition de victoire est remplie diagonalement
@@ -29,60 +31,6 @@ public class manager {
         }else return(diagonaleRight(blockLocation));
     }
 
-    public Boolean horizontale(Location blockLocation) {
-        // Compteur pour compter le nombre de cases de la même couleur
-        int counter = 0;
-
-        // Pour chaque case de la ligne
-        for (int i = 1; i < 4; i +=1) {
-            // On se déplace à gauche
-            blockLocation.setX(blockLocation.getX() - i);
-
-            // Si on est pas à la bordure gauche
-            if(blockLocation.getX() != 0) {
-                // Si la case est de la même couleur que le joueur actuel
-                if (start.actualPlayer.equals(register.player1name) && blockLocation.getBlock().getType() == Material.STAINED_CLAY) {
-                    counter += 1;
-                } else if (start.actualPlayer.equals(register.player2name) && blockLocation.getBlock().getType() == Material.WOOL) {
-                    counter += 1;
-                }
-            }
-            // On se déplace à droite pour ne pas influencer la prochaine itération
-            blockLocation.setX(blockLocation.getX() + i);
-        }
-        // Si toutes les cases ont été de la même couleur
-        if(counter== 3){
-            return true;
-        }
-
-        // Réinitialisation du compteur
-        counter = 0;
-
-        // Pour chaque case de la ligne
-        for (int i = -1; i > -4; i -=1) {
-            // On se déplace à droite
-            blockLocation.setX(blockLocation.getX() + i);
-
-            // Si on est pas à la bordure droite
-            if(blockLocation.getX() !=8) {
-                // Si la case est de la même couleur que le joueur actuel
-                if (start.actualPlayer.equals(register.player1name) && blockLocation.getBlock().getType() == Material.STAINED_CLAY) {
-                    counter += 1;
-                } else if (start.actualPlayer.equals(register.player2name) && blockLocation.getBlock().getType() == Material.WOOL) {
-                    counter += 1;
-                }
-                // On se déplace à gauche pour ne pas influencer la prochaine itération
-                blockLocation.setX(blockLocation.getX() - i);
-            }
-
-        }
-        // Si toutes les cases ont été de la même couleur
-        return counter == 3;
-    }
-
-
-
-
     public Boolean verticale(Location blockLocation){
         int counter = 0;
 
@@ -90,7 +38,7 @@ public class manager {
             // Déplace le blockLocation à un emplacement différent
             blockLocation.setY(blockLocation.getY() + i);
 
-            // Si la nouvelle position du blockLocation n'est pas sur la limite supérieure
+            // Si la nouvelle position du blockLocation n'est pas sur la limite inférieure
             if(blockLocation.getY() !=105) {
                 // Si le joueur courant est le premier joueur et que le type du bloc correspond au type attendu
                 if (start.actualPlayer.equals(register.player1name) && blockLocation.getBlock().getType() == Material.STAINED_CLAY) {
@@ -109,6 +57,58 @@ public class manager {
         return counter == 3;
     }
 
+    public Boolean horizontale(Location blockLocation) {
+        // Compteur pour compter le nombre de cases de la même couleur
+        int counter = 0;
+        Location location = blockLocation;
+        // Pour chaque case de la ligne
+        for (int i = 1; i < 4; i +=1) {
+            // On se déplace à gauche
+            location.setX(blockLocation.getX() - i);
+
+            // Si on est pas à la bordure gauche et droite
+            if(location.getX() !=8 && location.getX() != 0) {
+                // Si la case est de la même couleur que le joueur actuel
+                if (start.actualPlayer.equals(register.player1name) && location.getBlock().getType() == Material.STAINED_CLAY) {
+                    counter += 1;
+                } else if (start.actualPlayer.equals(register.player2name) && location.getBlock().getType() == Material.WOOL) {
+                    counter += 1;
+                }
+            }
+            // On se déplace à droite pour ne pas influencer la prochaine itération
+            location.setX(location.getX() + i);
+        }
+        // Si toutes les cases ont été de la même couleur
+        System.out.println(counter);
+        if(counter== 3){
+            return true;
+        }
+
+        // Réinitialisation du compteur
+        counter = 0;
+
+        // Pour chaque case de la ligne
+        for (int i = -1; i > -4; i -=1) {
+            // On se déplace à droite
+            location.setX(location.getX() + i);
+
+            // Si on est pas à la bordure droite ni à gauche
+            if(location.getX() !=8 && location.getX() != 0) {
+                // Si la case est de la même couleur que le joueur actuel
+                if (start.actualPlayer.equals(register.player1name) && location.getBlock().getType() == Material.STAINED_CLAY) {
+                    counter += 1;
+                } else if (start.actualPlayer.equals(register.player2name) && location.getBlock().getType() == Material.WOOL) {
+                    counter += 1;
+                }
+                // On se déplace à gauche pour ne pas influencer la prochaine itération
+                location.setX(location.getX() - i);
+            }
+
+        }
+        // Si toutes les cases ont été de la même couleur
+        System.out.println(counter);
+        return counter == 3;
+    }
 
 
     public Boolean diagonaleLeft(Location blockLocation){

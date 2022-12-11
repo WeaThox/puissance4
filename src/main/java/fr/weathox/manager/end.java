@@ -39,7 +39,7 @@ public class end {
             NMSUtils.sendTitle(Player, "§aGagné !", "§b" + player + "§f a gagné la partie", 1, 3, 1);
         }
         // On envoie un message au joueur pour lui indiquer que la partie a recommencer automatiquement !
-        Player.sendMessage(Puissance.prefix + "§fLa partie vient de §brecommencer §f. C'est à §6" + start.actualPlayer + " §f de jouer !");
+        Player.sendMessage(Puissance.prefix + "§fLa partie vient de §brecommencer§f. C'est à §6" + start.actualPlayer + "§f de jouer !");
     }
 
 
