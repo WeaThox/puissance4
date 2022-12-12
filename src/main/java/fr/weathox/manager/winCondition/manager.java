@@ -20,12 +20,10 @@ public class manager {
 
         // Vérifie si la condition de victoire est remplie horizontalement
         if (verticale(blockLocation)) {
-            Bukkit.broadcastMessage("VERTICALE");
             return true;
         }
         // Vérifie si la condition de victoire est remplie verticalement
         else if (horizontale(blockLocation)) {
-            Bukkit.broadcastMessage("HORIZONTALE");
             return true;
         }else return(diagonale(blockLocation));
     }
